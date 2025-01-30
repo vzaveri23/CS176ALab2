@@ -64,13 +64,11 @@ int main(int argc, char *argv[]) {
 
     if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         perror("Bind failed");
-        // close(server_fd);
         exit(EXIT_FAILURE);
     }
 
     if (listen(server_fd, 1) < 0) {
         perror("Listen failed");
-        // close(server_fd);
         exit(EXIT_FAILURE);
     }
 

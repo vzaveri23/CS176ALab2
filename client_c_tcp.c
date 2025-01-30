@@ -1,7 +1,7 @@
 //inspiration for code from:
 // https://stackoverflow.com/questions/35568996/socket-programming-udp-client-server-in-c, 
 // https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/
-// and ChatGPT for syntactical decisions
+// and ChatGPT for syntactical decisions, error checking
 
 #include <stdio.h>
 #include <stdlib.h>
