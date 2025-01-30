@@ -1,4 +1,5 @@
 // Reference: https://stackoverflow.com/questions/35568996/socket-programming-udp-client-server-in-c
+// Used the above link to set up the basic client and server code
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +16,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // Set up buffer and parse arguments from command line
     int sockfd;
     struct sockaddr_in server_addr;
     socklen_t len = sizeof(server_addr);
@@ -29,13 +31,14 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // Assign address family, server port, and server IP
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(server_port);
     server_addr.sin_addr.s_addr = inet_addr(server_ip);
 
 
-    // Get user input and send to server
+    // Get user input and send string to server
     printf("Enter string: ");
     fgets(buffer, BUFFER_SIZE, stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
@@ -49,10 +52,12 @@ int main(int argc, char *argv[]) {
             break;
         }
         
+        // Insert null terminator at end of buffer
         buffer[n] = '\0';
         printf("From server: %s\n", buffer);
 
          // Check if the received message is a single digit or invalid input
+         // Used chatGPT to determine error checking
         if (strcmp(buffer, "Sorry, cannot compute!") == 0 || 
             (strlen(buffer) == 1 && buffer[0] >= '0' && buffer[0] <= '9')) {
             break;

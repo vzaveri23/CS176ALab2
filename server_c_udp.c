@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // From stackoverflow post linked in client
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     struct sockaddr_in server_addr, client_addr;
     const int BUFFER_SIZE = 129;
