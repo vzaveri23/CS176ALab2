@@ -33,8 +33,7 @@ int sum_of_digits(const char *str) {
 int main(int argc, char *argv[]) {
     const int MAX_BUFFER_SIZE = 129;
 
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <port>\n", argv[0]);
+    if (argc != 2) { //error check for arguments from chatgpt
         exit(EXIT_FAILURE);
     }
 
@@ -44,13 +43,13 @@ int main(int argc, char *argv[]) {
     char buffer[MAX_BUFFER_SIZE];
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_fd < 0) {
+    if (server_fd < 0) { //error check from chatgpt
         perror("Socket creation failed");
         exit(EXIT_FAILURE);
     }
 
     int opt = 1;
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) { //error check from chatgpt
         perror("setsockopt failed");
         close(server_fd);
         exit(EXIT_FAILURE);
@@ -62,12 +61,12 @@ int main(int argc, char *argv[]) {
     server_addr.sin_port = htons(atoi(argv[1]));
 
 
-    if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+    if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) { //binding error check from chatgpt
         perror("Bind failed");
         exit(EXIT_FAILURE);
     }
 
-    if (listen(server_fd, 1) < 0) {
+    if (listen(server_fd, 1) < 0) { //listening error check fromc chatgpt
         perror("Listen failed");
         exit(EXIT_FAILURE);
     }
@@ -84,7 +83,7 @@ int main(int argc, char *argv[]) {
         int bytes_read = read(client_fd, buffer, MAX_BUFFER_SIZE - 1);
 
         if (bytes_read <= 0) {
-            perror("Read failed");
+            perror("Read failed"); //error check for making sure bytes are read from chatgpt
             close(client_fd);
             continue;
         }
@@ -104,7 +103,7 @@ int main(int argc, char *argv[]) {
                 write(client_fd, new_buffer, strlen(new_buffer));
 
                 if (res < 10) break;
-                usleep(1000);
+                usleep(1000); //sleep code suggetsed from chatgpt as well, left it in cuz it worked
 
             }
         }

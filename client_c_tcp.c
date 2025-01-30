@@ -12,8 +12,7 @@
 
 int main(int argc, char *argv[]) {
     const int MAX_BUFFER_SIZE = 129;
-    if (argc != 3) {
-        // fprintf(stderr, "Usage: %s <ip> <port>\n", argv[0]);
+    if (argc != 3) { //from chatgpt - error checking 
         exit(EXIT_FAILURE);
     }
 
@@ -24,7 +23,7 @@ int main(int argc, char *argv[]) {
     char buffer[MAX_BUFFER_SIZE];
 
     sock_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock_fd < 0) {
+    if (sock_fd < 0) { //from chatgpt - error checking 
         perror("Socket creation failed");
         exit(EXIT_FAILURE);
     }
@@ -33,13 +32,13 @@ int main(int argc, char *argv[]) {
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
 
-    if (inet_pton(AF_INET, argv[1], &server_addr.sin_addr) <= 0) {
+    if (inet_pton(AF_INET, argv[1], &server_addr.sin_addr) <= 0) { //from chatgpt - error checking 
         perror("Invalid address");
         close(sock_fd);
         exit(EXIT_FAILURE);
     }
 
-    if (connect(sock_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+    if (connect(sock_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) { //from chatgpt - error checking 
         perror("Connection failed");
         close(sock_fd);
         exit(EXIT_FAILURE);
@@ -57,7 +56,7 @@ int main(int argc, char *argv[]) {
         buffer[bytes_read] = '\0';
         printf("From server: %s\n", buffer);
 
-        if (strcmp(buffer, "Sorry, cannot compute!") == 0 || 
+        if (strcmp(buffer, "Sorry, cannot compute!") == 0 || //from chatgpt - error checking for buffer
             (strlen(buffer) == 1 && buffer[0] >= '0' && buffer[0] <= '9')) {
             break;
         }
