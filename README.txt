@@ -2,5 +2,13 @@ Group: Skanda Vasishta and Viraj Zaveri
 
 How UDP client-server program works:
 
+The client side of the program creates a UDP socket utilizing the IP address and port number specified as command line arguments. It then prompts the user
+to enter a string, which is stored in a buffer of 129 bytes, to send to the server via the sendto() primitive. Since UDP is a connectionless protocol, there
+is no explicit connection set up between the client and server as the client simply relies on the IP address and port to send the data to. It then enters a
+loop to repeatedly receive the intermediate sums computed from the server and exits when the result is either invalid or is a single digit. On the server side,
+it reads the port as input from the command line and binds it to a socket to receive data from the client, which is stores on the buffer. If the buffer's content 
+is non-numeric, the server sends an error message and the client closes. Otherwise, the sum of the digits is repeatedly computed and sent back to the client to
+print out.
+
 
 How TCP client-server program works:
